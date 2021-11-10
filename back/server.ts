@@ -1,4 +1,4 @@
-import express, { Express } from 'express';
+import express, { Express, Router } from 'express';
 import moment from 'moment';
 import { config } from 'dotenv';
 import { json } from 'body-parser';
@@ -6,6 +6,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import DB from './db/db';
 import LoreController from './api/lore.controller';
+import path from 'path';
 
 config();
 
@@ -17,10 +18,21 @@ class Server {
     this.initMiddlewares();
     this.initDatabase();
     this.initRouters();
+    this.initWeb();
+  }
+
+  private initWeb(): void {
+    const webFolder = path.resolve(__dirname, '..', 'web')
+    this._app.use('/public', express.static(path.resolve(webFolder, 'public')));
+    this._app.get('/', (req, res) => {
+      res.sendFile(path.resolve(webFolder, 'index.html'))
+    })
   }
 
   private initRouters(): void {
-    this._app.use('/lores', new LoreController().router);
+    const router = Router();
+    router.use('/lores', new LoreController().router);
+    this._app.use('/api', router);
   }
 
   private initDatabase(): void {
@@ -31,6 +43,12 @@ class Server {
 
   private initMiddlewares(): void {
     this._app.use(helmet());
+    this._app.use(helmet.contentSecurityPolicy({
+      useDefaults: true,
+      directives: {
+        "script-src": ["'self'", "'unsafe-eval'"]
+      }
+    }));
     this._app.use(cors());
     this._app.use(json());
     this._app.use(this.logger());
