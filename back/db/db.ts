@@ -1,4 +1,3 @@
-import { Response } from 'express';
 import mongoose from 'mongoose';
 
 export default class DB {

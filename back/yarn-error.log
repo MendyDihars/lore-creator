@@ -1,0 +1,41 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\mendy\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @type/body-parser body-parser cors @types/cors @types/express express @types/node dotenv helmet moment mongoose ts-node typescript
+
+PATH: 
+  D:\Cmder\vendor\bin;D:\Cmder\vendor\conemu-maximus5\ConEmu\Scripts;D:\Cmder\vendor\conemu-maximus5;D:\Cmder\vendor\conemu-maximus5\ConEmu;C:\tools\ruby30\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;D:\HashLink;C:\Program Files\Git\cmd;C:\Users\mendy\AppData\Local\Microsoft\WindowsApps;C:\Users\mendy\AppData\Roaming\npm;C:\Users\mendy\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;D:\RailsInstaller\Ruby2.3.3\bin;C:\Users\mendy\AppData\Local\Microsoft\WindowsApps;C:\Users\mendy\AppData\Roaming\npm;C:\Users\mendy\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\mendy\.dotnet\tools;C:\Users\mendy\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;D:\Cmder
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  14.3.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@type%2fbody-parser: Not found
+      at Request.params.callback [as _callback] (C:\Users\mendy\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66988:18)
+      at Request.self.callback (C:\Users\mendy\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140662:22)
+      at Request.emit (events.js:315:20)
+      at Request.<anonymous> (C:\Users\mendy\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141634:10)
+      at Request.emit (events.js:315:20)
+      at IncomingMessage.<anonymous> (C:\Users\mendy\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141556:12)
+      at Object.onceWrapper (events.js:421:28)
+      at IncomingMessage.emit (events.js:327:22)
+      at endReadableNT (_stream_readable.js:1224:12)
+      at processTicksAndRejections (internal/process/task_queues.js:84:21)
+
+npm manifest: 
+  {
+    "name": "back",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

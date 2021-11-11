@@ -8,7 +8,9 @@ import DB from './db/db';
 import LoreController from './api/lore.controller';
 import path from 'path';
 
-config();
+config({
+  path: path.resolve(__dirname, '..', '.env')
+});
 
 class Server {
   private _app: Express = express();
