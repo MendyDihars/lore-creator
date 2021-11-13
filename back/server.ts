@@ -58,7 +58,7 @@ class Server {
 
   private logger() {
     return  (req, _, next) => {
-      console.log(`${moment().format()} -- ${req.method} - ${req.url} - ${req.query}`)
+      console.log(`${moment().format()} -- ${req.method} - ${req.url} - ${JSON.stringify(req.query)}`)
       next();
     }
   }
