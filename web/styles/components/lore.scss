@@ -1,0 +1,22 @@
+.lore {
+  border-radius: 50%;
+  height: 190px;
+  width: 190px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all ease 0.3s;
+  cursor: pointer;
+  &:hover {
+    height: 200px;
+    width: 200px;
+    font-size: 20px;
+  }
+  span {
+    font-weight: bold;
+    font-size: 18px;
+    text-shadow: 0 0 1.5px $main-color;
+    display: block;
+    color: $main-color;
+  }
+}

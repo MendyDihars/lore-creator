@@ -1,31 +1,31 @@
 import React, { Component } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import type { Lore } from '../types/lore';
+import type { Lore as LoreEntity } from '../types/lore';
 import LoreAction from '../actions/lore-action';
+import Decorator from '../decorator';
+import Lore from '../components/Lore';
 
 interface Props {
   dispatch?: Dispatch,
-  lores?: Lore[]
+  lores?: LoreEntity[]
 }
 
 class Home extends Component<Props, {}> {
   private _loreAction = new LoreAction();
+  private _decorator = new Decorator();
 
   public componentDidMount() {
     const { dispatch } = this.props;
     dispatch(this._loreAction.fetch() as any);
   } 
   
-
-  render() {
+  public render() {
     const { lores } = this.props;
     return (
       <ul>
         {lores.map(lore => (
-          <li key={lore.name.toLowerCase().replace(/\s/, '_')}>
-            {lore.name}
-          </li>
+          <Lore key={this._decorator.toKey(lore)} lore={lore}/>
         ))}
       </ul>
     )

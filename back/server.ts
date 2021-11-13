@@ -48,7 +48,8 @@ class Server {
     this._app.use(helmet.contentSecurityPolicy({
       useDefaults: true,
       directives: {
-        "script-src": ["'self'", "'unsafe-eval'"]
+        "script-src": ["'self'", "'unsafe-eval'"],
+        "img-src": ['*']
       }
     }));
     this._app.use(cors());

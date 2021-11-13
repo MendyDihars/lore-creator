@@ -2,7 +2,8 @@ import mongoose, { Schema, Model } from 'mongoose';
 
 export default class Lore {
   private _schema = new Schema({
-    name: { type: String }
+    name: { type: String },
+    url: { type: String }
   });
 
   public get model(): Model<any> {

@@ -1,5 +1,11 @@
-*, body {
+@import "./variables.scss";
+
+body {
   font-family: arial, sans-serif;
   margin: 0;
   padding: 0;
+  background: $main-color;
+  color: white;
 }
+
+@import "./components/lore.scss";
