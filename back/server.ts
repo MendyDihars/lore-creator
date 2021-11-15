@@ -26,7 +26,7 @@ class Server {
   private initWeb(): void {
     const webFolder = path.resolve(__dirname, '..', 'web')
     this._app.use('/public', express.static(path.resolve(webFolder, 'public')));
-    this._app.get('/', (req, res) => {
+    this._app.get('*', (req, res) => {
       res.sendFile(path.resolve(webFolder, 'index.html'))
     })
   }

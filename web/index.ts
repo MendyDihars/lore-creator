@@ -6,6 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from 'react-redux';
+import { Link } from 'react-router-dom';
 import logger from 'redux-logger';
 import { configureStore } from '@reduxjs/toolkit';
 
@@ -25,7 +26,16 @@ const store = configureStore({
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <div className="screen">
+        <div className="app">
+          <App />
+        </div>
+        <Link to="/" className="footer flexcenter">
+          <div>
+            Retour à l'accueil
+          </div>
+        </Link>
+      </div>
     </BrowserRouter>
   </Provider>,
   document.getElementById('app')

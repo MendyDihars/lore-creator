@@ -9,4 +9,13 @@ export default class LoreService {
         .catch(reject);
     })
   }
+
+  public findLore(id: string): Promise<Lore> {
+    return new Promise((resolve, reject) => {
+      fetch(`/api/lores/${id}`)
+        .then(res => res.json())
+        .then(resolve)
+        .catch(reject)
+    })
+  }
 }
