@@ -1,11 +1,15 @@
+@import "https://fonts.googleapis.com/css2?family=Mulish&display=swap";
+
 @import "./variables.scss";
 
 body {
-  font-family: arial, sans-serif;
+  font-family: 'Mulish', arial, sans-serif;
   margin: 0;
   padding: 0;
   background: $main-color;
   color: white;
 }
+
+@import "./views/home.scss";
 
 @import "./components/lore.scss";

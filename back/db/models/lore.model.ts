@@ -1,12 +1,17 @@
-import mongoose, { Schema, Model } from 'mongoose';
+import mongoose, { Schema, Model, model } from 'mongoose';
+
+interface ILore {
+  name: string;
+  image?: string
+}
 
 export default class Lore {
-  private _schema = new Schema({
-    name: { type: String },
-    url: { type: String }
+  private _schema = new Schema<ILore>({
+    name: { type: String, required: true },
+    image: { type: String }
   });
 
   public get model(): Model<any> {
-    return mongoose.models.Lore || mongoose.model('Lore', this._schema);
+    return mongoose.models.Lore || model<ILore>('Lore', this._schema);
   }
 }

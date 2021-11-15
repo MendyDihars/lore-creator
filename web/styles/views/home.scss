@@ -1,0 +1,11 @@
+.home {
+  height: 100vh;
+  ul.home-content {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}

@@ -23,11 +23,13 @@ class Home extends Component<Props, {}> {
   public render() {
     const { lores } = this.props;
     return (
-      <ul>
-        {lores.map(lore => (
-          <Lore key={this._decorator.toKey(lore)} lore={lore}/>
-        ))}
-      </ul>
+      <section className="home">
+        <ul className="home-content">
+          {lores.map(lore => (
+            <Lore key={this._decorator.toKey(lore)} lore={lore}/>
+          ))}
+        </ul>
+      </section>
     )
   }
 }

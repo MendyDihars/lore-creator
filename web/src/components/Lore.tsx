@@ -9,7 +9,7 @@ class Lore extends Component<Props, {}> {
   render() {
     const { lore } = this.props;
     return (
-      <div className="lore" style={ { background: `url('${lore.url}') center no-repeat` } }>
+      <div className="lore" style={ { background: `url('${lore.image}') center no-repeat` } }>
         <span>
           {lore.name}
         </span>

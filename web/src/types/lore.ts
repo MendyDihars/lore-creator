@@ -1,6 +1,6 @@
 export interface Lore { 
   name: string;
-  url?: string;
+  image?: string;
 }
 
 export interface LoreState {
