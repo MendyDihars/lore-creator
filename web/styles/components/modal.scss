@@ -1,0 +1,11 @@
+.modal {
+  @extend .flexcenter;
+  color: $main-color;
+  height: 100%;
+    &-content {
+    padding: 16px;
+    min-width: 35%;
+    background: white;
+    border-radius: 2px;
+  }
+}
