@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 
-export default class DB {
-  public async init(): Promise<void> {
-    const { DB_PATH } = process.env;
-    await mongoose.connect(DB_PATH);
-  }
+export const initDB = async (): Promise<void> => {
+  const { DB_PATH } = process.env;
+  await mongoose.connect(DB_PATH);
 }

@@ -1,5 +1,5 @@
 export interface Lore { 
-  id: string;
+  id?: string;
   name: string;
   image?: string;
 }
@@ -7,7 +7,7 @@ export interface Lore {
 export interface LoreState {
   lores: Lore[];
   loading?: boolean;
-  current?: Lore;
+  lore?: Lore;
 }
 
 export interface LoreAction {

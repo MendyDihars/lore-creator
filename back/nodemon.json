@@ -1,5 +1,5 @@
 {
-  "watch": ["back"],
+  "watch": ["api", "db", "server.ts", "types.ts"],
   "ext": "ts,json",
   "ignore": [],
   "exec": "ts-node ./server.ts"

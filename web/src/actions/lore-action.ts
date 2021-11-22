@@ -1,24 +1,14 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import LoreService from '../services/lore-service';
+import { fetchLores, findLore } from '../services/lore-service';
 import type { Lore } from '../types/lore';
 import { FETCH_LORE, SELECT_LORE, FIND_LORE } from '../constants';
 
-export default class LoreAction {
-  private _service = new LoreService();
+export const fetch = createAsyncThunk(FETCH_LORE, async (): Promise<Lore[]> => {
+  return await fetchLores();
+});
 
-  public get fetch() {
-    return createAsyncThunk(FETCH_LORE, async (): Promise<Lore[]> => {
-      return await this._service.fetchLores();
-    })
-  }
+export const find = createAsyncThunk(FIND_LORE, async (id: string): Promise<Lore> => {
+  return await findLore(id);
+});
 
-  public get find() {
-    return createAsyncThunk(FIND_LORE, async (id: string): Promise<Lore> => {
-      return await this._service.findLore(id);
-    })
-  }
-
-  public get select() {
-    return createAction<Lore>(SELECT_LORE);
-  }
-}
+export const select = createAction<Lore>(SELECT_LORE);

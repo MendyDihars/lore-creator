@@ -9,21 +9,20 @@ interface ICharacter {
   lore: Schema.Types.ObjectId;
 }
 
-export default class Character {
-  private _schema = new Schema<ICharacter>({
-    name: { type: String, required: true },
-    class: { type: String, required: true },
-    race: { type: String, required: true },
-    age: { type: Number, required: true },
-    player: { type: String },
-    lore: {
-      type: Schema.Types.ObjectId,
-      ref: 'Lore',
-      required: true
-    }
-  });
-
-  public get model(): Model<any> {
-    return mongoose.models.Character || model<ICharacter>('Character', this._schema);
+const schema = new Schema<ICharacter>({
+  name: { type: String, required: true },
+  class: { type: String, required: true },
+  race: { type: String, required: true },
+  age: { type: Number, required: true },
+  player: { type: String },
+  lore: {
+    type: Schema.Types.ObjectId,
+    ref: 'Lore',
+    required: true
   }
-}
+});
+
+const createCharacterModel = (): Model<any> =>
+  mongoose.models.Character || model<ICharacter>('Character', schema);
+
+export default createCharacterModel;

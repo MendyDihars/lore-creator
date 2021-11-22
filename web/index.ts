@@ -10,7 +10,8 @@ import { Link } from 'react-router-dom';
 import logger from 'redux-logger';
 import { configureStore } from '@reduxjs/toolkit';
 
-import LoreReducer from './src/reducers/lore-reducers';
+import LoreReducer from './src/reducers/lore-reducer';
+import EventReducer from './src/reducers/event-reducer';
 
 import App from './src/App';
 
@@ -18,7 +19,8 @@ const middleware = defaultMiddleware => defaultMiddleware().concat(logger);
 
 const store = configureStore({
   reducer : {
-    lores: new LoreReducer().reducer()
+    lores: LoreReducer,
+    events: EventReducer
   },
   middleware
 });

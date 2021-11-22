@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Modal as ModalMUI,
   Fade,
@@ -11,27 +11,25 @@ interface Props {
   children: JSX.Element | string;
 }
 
-class Modal extends Component<Props, {}>{
-  render() {
-    const { children, isOpen, toggle } = this.props;
-    return (
-      <ModalMUI
-        open={isOpen}
-        onClose={toggle(false)}
-        closeAfterTransition
-      >
-        <Fade in={isOpen}>
-          <div className="modal">
-            <ClickAwayListener onClickAway={toggle(false)}>
-              <div className="modal-content">
-                {children}
-              </div>
-            </ClickAwayListener>
-          </div>
-        </Fade>
-      </ModalMUI>
-    )
-  }
+const Modal = (props: Props) => {
+  const { children, isOpen, toggle } = props;
+  return (
+    <ModalMUI
+      open={isOpen}
+      onClose={toggle(false)}
+      closeAfterTransition
+    >
+      <Fade in={isOpen}>
+        <div className="modal">
+          <ClickAwayListener onClickAway={toggle(false)}>
+            <div className="modal-content">
+              {children}
+            </div>
+          </ClickAwayListener>
+        </div>
+      </Fade>
+    </ModalMUI>
+  )
 }
 
 export default Modal;

@@ -1,76 +1,67 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import type { Lore } from '../types/lore';
+import type { Event as EventEntity } from '../types/event';
 import Loading from '../components/Loading';
-import LoreAction from '../actions/lore-action';
-import { Button } from '@mui/material';
+import { find } from '../actions/lore-action';
+import { fetch } from '../actions/event-action';
+import { Button, Typography } from '@mui/material';
 import Modal from '../components/Modal';
-interface Props {
-  dispatch: Dispatch
-  current: Lore;
-  loading: boolean;
-}
+import FormEvent from '../components/Forms/FormEvent';
+import Event from '../components/Event';
+import { toKey } from '../decorator';
 
-interface State {
-  newEvent: boolean;
-}
+const Dashboard = (props: {}) => {
+  const dispatch: Dispatch = useDispatch();
+  const lore: Lore = useSelector((state: any) => state.lores?.lore);
+  const events: EventEntity[] = useSelector((state: any) => state.events?.events);
+  const loreLoading: boolean = useSelector((state: any) => state.lores?.loading);
+  const eventLoading: boolean = useSelector((state: any) => state.events?.loading);
+  const [newEvent, setNewEvent] = useState(false);
+  const loading = loreLoading && eventLoading;
 
-class Dashboard extends Component<Props, State> {
-  private _loreAction = new LoreAction();
-
-  public state: State = {
-    newEvent: false
-  }
-
-  constructor(props: Props) {
-    super(props);
-    this.toggleNewEvent = this.toggleNewEvent.bind(this);
-  }
-
-  componentDidMount() {
-    const { current, dispatch } = this.props;
-    if (!current) {
-      const id = sessionStorage.getItem('lore')
+  useEffect(() => {
+    const id = sessionStorage.getItem('lore')
+    if (!lore) {
       if (id) {
-        dispatch(this._loreAction.find(id) as any);
+        dispatch(find(id) as any);
       }
     }
-  }
-
-  toggleNewEvent(isOpen: boolean) {
-    return () => {
-      this.setState({ newEvent: isOpen })
+    if (!events?.length) {
+      dispatch(fetch(id) as any);
     }
+  }, [])
+
+  const toggleNewEvent = (isOpen: boolean) => () => {
+    setNewEvent(isOpen);
   }
 
-  render() {
-    const { current, loading } = this.props;
-    const { newEvent } = this.state
-    return (
-      <>
-        {loading && <Loading />}
-        <div className="dashboard">
-          <div className="flexcenter">
-            <h1>{current?.name}</h1>
-          </div>
-          <div className="flexcenter">
-            <Button variant="outlined" onClick={this.toggleNewEvent(true)}>
-              Nouvel événement
-            </Button>
-          </div>
-          <Modal isOpen={newEvent} toggle={this.toggleNewEvent}>
-            Créer un nouvel évènement
-          </Modal>
+  return (
+    <>
+      {loading && <Loading />}
+      <div className="dashboard">
+        <div className="flexcenter">
+          <Typography variant="h2">{lore?.name}</Typography>
         </div>
-      </>
-    )
-  }
+        <div className="flexcenter mt-32">
+          <Button color="secondary" variant="outlined" onClick={toggleNewEvent(true)}>
+            Nouvel événement
+          </Button>
+        </div>
+        <div className="events-wrapper mt-32">
+          {
+            events.map((event: EventEntity) => (
+              <Event  event={event} key={toKey(event)} />
+            ))
+          }
+        </div>
+        <Modal isOpen={newEvent} toggle={toggleNewEvent}>
+          <FormEvent onClose={toggleNewEvent(false)} edition={false} />
+        </Modal>
+      </div>
+    </>
+  )
 }
 
-const mapStateToProps = state => {
-  const { current, loading } = state.lores;
-  return { current, loading };
-}
-
-export default connect(mapStateToProps)(Dashboard);
+export default Dashboard;

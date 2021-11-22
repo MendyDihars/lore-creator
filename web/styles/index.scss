@@ -40,8 +40,14 @@ a {
   }
 }
 
+h1 {
+  color: $primary;
+}
+
 @import "./views/home.scss";
 
 @import "./components/loading.scss";
 @import "./components/lore.scss";
 @import "./components/modal.scss";
+@import "./components/form.scss";
+@import "./components/event.scss";

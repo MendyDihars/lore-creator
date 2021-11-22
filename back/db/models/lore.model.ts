@@ -5,13 +5,12 @@ interface ILore {
   image?: string
 }
 
-export default class Lore {
-  private _schema = new Schema<ILore>({
-    name: { type: String, required: true },
-    image: { type: String }
-  });
+const schema = new Schema<ILore>({
+  name: { type: String, required: true },
+  image: { type: String }
+});
 
-  public get model(): Model<any> {
-    return mongoose.models.Lore || model<ILore>('Lore', this._schema);
-  }
-}
+const createLoreModel = (): Model<any> =>
+  mongoose.models.Lore || model<ILore>('Lore', schema);
+
+export default createLoreModel;
