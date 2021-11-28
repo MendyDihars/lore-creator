@@ -18,15 +18,15 @@ module.exports = {
   },
   module: {
     rules: [
+      // {
+      //   test: /\.(t|j)sx?$/,
+      //   exclude: /node_modules/,
+      //   use: [
+      //     'ts-loader'
+      //   ]
+      // },
       {
-        test: /\.ts$/,
-        exclude: /node_modules/,
-        use: [
-          'ts-loader'
-        ]
-      },
-      {
-        test: /\.tsx?$/,
+        test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
         use: [
           'babel-loader'

@@ -8,3 +8,9 @@ export interface IEvent {
   name: string;
   image?: string;
 }
+
+export interface IPeriod {
+  id: string;
+  name: string;
+  position: number;
+}

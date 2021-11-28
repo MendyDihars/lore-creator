@@ -5,9 +5,12 @@ import { json } from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import { initDB } from './db/db';
+import path from 'path';
+
+// Routers
 import LoreRouter from './api/lore-router';
 import EventRouter from './api/event-router';
-import path from 'path';
+import PeriodRouter from './api/period-router';
 
 config({
   path: path.resolve(__dirname, '..', '.env')
@@ -45,6 +48,7 @@ initDB().then(() => console.log('DB connected'));
 const router = Router();
 router.use('/lores', LoreRouter);
 router.use('/events', EventRouter);
+router.use('/periods', PeriodRouter);
 app.use('/api', router);
 
 // Web part

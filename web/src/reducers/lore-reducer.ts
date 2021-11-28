@@ -1,30 +1,24 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { fetch, find, select } from '../actions/lore-action';
+import { unload, handlePendingAndRejected } from './helpers';
 import type { LoreState, Lore } from '../types/lore';
 
 const initialState: LoreState = {
   lores: []
 }
 
-const unload = state => state.loading = false;
-const load = state => state.loading = true;
-
 const LoreReducer = createReducer(initialState, builder => {
-  [fetch, find].forEach(action => {
-    builder
-      .addCase(action.pending, (state, _) => { load(state) })
-      .addCase(action.rejected, (state, _) => { unload(state) })
-  })
+  handlePendingAndRejected(builder, [find, fetch])
   builder
-    .addCase(fetch.fulfilled, (state, action) => {
+    .addCase(fetch.fulfilled, (state: LoreState, action): void => {
       unload(state);
       state.lores = action.payload as Lore[];
     })
-    .addCase(find.fulfilled, (state, action) => {
+    .addCase(find.fulfilled, (state: LoreState, action): void => {
       unload(state);
       state.lore = action.payload as Lore;
     })
-    .addCase(select, (state, action) => {
+    .addCase(select, (state: LoreState, action): void => {
       state.lore = action.payload as Lore;
     })
 })

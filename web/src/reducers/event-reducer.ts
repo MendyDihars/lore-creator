@@ -1,5 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { create, fetch } from '../actions/event-action';
+import { unload, handlePendingAndRejected } from './helpers';
 import type { EventState, Event } from '../types/event';
 
 const initialState: EventState = {
@@ -7,22 +8,15 @@ const initialState: EventState = {
   loading: false
 }
 
-const unload = state => state.loading = false;
-const load = state => state.loading = true;
-
 const EventReducer = createReducer(initialState, builder => {
-  [create, fetch].forEach(action => {
-    builder
-      .addCase(action.pending, (state, _) => { load(state); })
-      .addCase(action.rejected, (state, _) => { unload(state); })
-  })
+  handlePendingAndRejected(builder, [create, fetch]);
   builder
-    .addCase(create.fulfilled, (state, action) => {
+    .addCase(create.fulfilled, (state: EventState, action): void => {
       unload(state);
       state.events = [ ...state.events, action.payload] as Event[];
       state.event = action.payload as Event;
     })
-    .addCase(fetch.fulfilled, (state, action) => {
+    .addCase(fetch.fulfilled, (state: EventState, action): void => {
       unload(state);
       state.events = action.payload;
     })

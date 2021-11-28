@@ -12,7 +12,6 @@ const create = async (req, res): Promise<void> => {
     await save(lore);
     res.status(200).send(cleanItem(lore));
   } catch (e) {
-    console.log('error', e)
     res.status(500).send('Something wrong with lore creation');
   }
 }
@@ -22,7 +21,6 @@ const list = async (req, res): Promise<void> => {
     const lores: ILore[] = await find({}, LoreModel);
     res.status(200).send(lores);
   } catch (e) {
-    console.log('error', e);
     res.status(404).send('No resource found');
   }
 }
@@ -33,7 +31,6 @@ const findOne = async (req, res): Promise<void> => {
     const lores: ILore[] = await find({ id }, LoreModel);
     res.status(200).send(lores[0]);
   } catch (e) {
-    console.log('error', e);
     res.status(404).send('No resource found');
   }
 }

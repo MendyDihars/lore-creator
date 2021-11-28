@@ -1,20 +1,20 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Dispatch } from 'redux';
-import { useDispatch, useSelector } from 'react-redux';
-import type { Lore as LoreEntity } from '../types/lore';
+import { useDispatch } from 'react-redux';
+import { useSelector } from '../../store';
 import { fetch, select } from '../actions/lore-action';
 import { toKey } from '../decorator';
 import Lore from '../components/Lore';
+import type { Lore as LoreEntity } from '../types/lore';
 
 interface Props {
-  dispatch?: Dispatch,
-  lores?: LoreEntity[]
+  dispatch?: Dispatch
 }
 
 const Home = (props: Props) => {
   const dispatch: Dispatch = useDispatch();
-  const lores: LoreEntity[] = useSelector((state: any) => state.lores?.lores);
+  const lores: LoreEntity[] = useSelector(state => state.lores?.lores);
 
   const goToDashboard = (lore: LoreEntity) => (): void => {
     sessionStorage.setItem('lore', lore.id);

@@ -13,6 +13,13 @@ interface Props {
 
 const Modal = (props: Props) => {
   const { children, isOpen, toggle } = props;
+  
+  const handleExceptions = (event) => {
+    if (event?.target !== document.body) {
+      toggle(false)();
+    }
+  }
+  
   return (
     <ModalMUI
       open={isOpen}
@@ -21,7 +28,7 @@ const Modal = (props: Props) => {
     >
       <Fade in={isOpen}>
         <div className="modal">
-          <ClickAwayListener onClickAway={toggle(false)}>
+          <ClickAwayListener onClickAway={handleExceptions}>
             <div className="modal-content">
               {children}
             </div>

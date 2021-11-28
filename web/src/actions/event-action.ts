@@ -7,6 +7,6 @@ export const create = createAsyncThunk(CREATE_EVENT, async (data: { id: string; 
   return await createEvent(data.id, data.event);
 });
 
-export const fetch = createAsyncThunk(FETCH_EVENT, async (lore_id: string): Promise<Event[]> => {
-  return await fetchEvents(lore_id);
+export const fetch = createAsyncThunk(FETCH_EVENT, async (loreId: string): Promise<Event[]> => {
+  return await fetchEvents(loreId);
 });

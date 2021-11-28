@@ -15,9 +15,9 @@ export const createEvent = (id: string, event: Event): Promise<Event> => {
   })
 }
 
-export const fetchEvents = (lore_id: string): Promise<Event[]> => {
+export const fetchEvents = (loreId: string): Promise<Event[]> => {
   return new Promise((resolve, reject) => {
-    fetch(`/api/events/lore/${lore_id}`)
+    fetch(`/api/events/lore/${loreId}`)
       .then(res => res.json())
       .then(resolve)
       .catch(reject)
