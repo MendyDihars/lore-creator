@@ -17,6 +17,6 @@ const schema = new Schema<IPeriod>({
 });
 
 const createPeriodModel = (): Model<any> =>
-  mongoose.models.Event || model<IPeriod>('Period', schema);
+  mongoose.models.Period || model<IPeriod>('Period', schema);
 
 export default createPeriodModel;

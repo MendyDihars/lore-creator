@@ -18,7 +18,19 @@ const FormPeriod = (props: Props) => {
   const dispatch: Dispatch = useDispatch();
   const [name, setName] = useState('');
   const [position, setPosition] = useState(1);
-  const displayedPeriods = periods?.filter(p => p.position > 1);
+
+  const createList = () => {
+    if (!periods.length) {
+      return [{ position: 1, name: 'Au début' }];
+    } else {
+      return [
+        ...periods.map(p => ({ name: `Avant : ${p.name}`, position: p.position })),
+        { name: 'A la fin', position: (periods.length + 1) }
+      ]
+    }
+  }
+
+  const listPeriods = createList();
 
   useEffect(() => {
     if (!periods.length) {
@@ -34,8 +46,8 @@ const FormPeriod = (props: Props) => {
     setName(event?.target?.value);
   }
 
-  const handlePosition = (event) => {
-    setPosition(event?.target?.value);
+  const handlePosition = (position: number) => () => {
+    setPosition(position);
   }
 
   const close = e => {
@@ -61,19 +73,11 @@ const FormPeriod = (props: Props) => {
         select
         value={period?.position || 1}
         label="Ou se situe la période"
-        onChange={handlePosition}
+        // onChange={handlePosition}
       >
-        {periods.length <= 1 && <MenuItem value={1}>Au début</MenuItem>}
         {
-          periods.length && (
-            <>
-              {
-                displayedPeriods.map(p => (
-                  <MenuItem value={p.position}>Avant : {p.name}</MenuItem>
-                ))
-              }
-              <MenuItem value={periods.length + 1}>A la fin</MenuItem>
-            </>
+          listPeriods.map(p =>
+            <MenuItem onClick={handlePosition(p.position)} value={p.position}>{p.name}</MenuItem>
           )
         }
       </TextField>

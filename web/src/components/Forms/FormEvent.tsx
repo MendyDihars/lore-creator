@@ -26,7 +26,7 @@ const FormEvent = (props: Props) => {
   }
 
   const save = (e) => {
-    if (!lore) {
+    if (!event) {
       dispatch(create({ id: lore.id, event: { name, image } }) as any);
       close(e);
     }

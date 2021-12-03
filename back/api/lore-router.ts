@@ -1,4 +1,4 @@
-import { save, cleanItem, find } from '../db/mongo';
+import { create as createLore, cleanItem, find } from '../db/mongo';
 import { Router } from 'express';
 import createLoreModel from '../db/models/lore.model'
 import { ILore } from '../types';
@@ -8,9 +8,8 @@ const LoreModel = createLoreModel();
 const create = async (req, res): Promise<void> => {
   try {
     const { body } = req;
-    const lore = new LoreModel(body);
-    await save(lore);
-    res.status(200).send(cleanItem(lore));
+    await createLore(body, LoreModel);
+    res.status(200).send(cleanItem(body));
   } catch (e) {
     res.status(500).send('Something wrong with lore creation');
   }

@@ -1,18 +1,17 @@
-import { save, find, cleanItem } from '../db/mongo';
+import { create as createEvent, find, cleanItem } from '../db/mongo';
 import { Router } from 'express';
 import createEventModel from '../db/models/event.model'
 import { IEvent } from '../types';
 
 
-const Model = createEventModel();
+const EventModel = createEventModel();
 
 const create = async (req, res): Promise<void> => {
   try {
     const { body } = req;
     const { loreId } = req.params;
     body.lore = loreId;
-    const event = new Model(body);
-    await save(event);
+    await createEvent(body, EventModel);
     res.status(200).send(cleanItem(event));
   } catch (e) {
     res.status(500).send('Something wrong with event creation');
@@ -22,7 +21,7 @@ const create = async (req, res): Promise<void> => {
 const list = async (req, res): Promise<void> => {
   try {
     const { loreId } = req.params;
-    const events: IEvent[] = await find({ lore: loreId }, Model);
+    const events: IEvent[] = await find({ lore: loreId }, EventModel);
     res.status(200).send(events);
   } catch (e) {
     res.status(404).send('No resource found');
@@ -32,7 +31,7 @@ const list = async (req, res): Promise<void> => {
 const findOne = async (req, res): Promise<void> => {
   try {
     const { id } = req.params;
-    const events: IEvent[] = await find({ id }, Model);
+    const events: IEvent[] = await find({ id }, EventModel);
     res.status(200).send(events[0]);
   } catch (e) {
     res.status(404).send('No resource found');

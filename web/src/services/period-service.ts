@@ -3,6 +3,9 @@ import type { Period } from '../types/period';
 export const createPeriod = (period: Period, loreId: string): Promise<Period[]> => {
   return new Promise((resolve, reject) => {
     fetch(`/api/periods/lores/${loreId}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
       method: 'POST',
       body: JSON.stringify(period)
     })
