@@ -1,6 +1,6 @@
 import { Model as ModelMongoose } from 'mongoose';
 
-export const create = (element: any, Model: ModelMongoose<any>): Promise<void> => {
+export const create = (element: any, Model: ModelMongoose<any>): Promise<any> => {
   return new Promise((resolve, reject) => {
     const instance = new Model(element);
     instance.save(err => {

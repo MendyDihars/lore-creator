@@ -25,8 +25,8 @@ export default class PeriodService {
 
   private static async addPeriod(periods: IPeriod[], period: IPeriod, PeriodModel: Model<any>): Promise<IPeriod[]> {
     period.position = periods.length || 1;
-    await create(period, PeriodModel);
-    periods.push(period);
+    const p = await create(period, PeriodModel);
+    periods.push(p);
     return periods;
   }
 
@@ -37,8 +37,7 @@ export default class PeriodService {
         currentPeriod.position += 1;
         await update(currentPeriod, PeriodModel);
       }
-      const instance = new PeriodModel(period);
-      await create(instance, PeriodModel);
+      const instance = await create(period, PeriodModel);
       periods.push(cleanItem(instance));
       return this.sortPeriods(periods);
     } catch (err) {

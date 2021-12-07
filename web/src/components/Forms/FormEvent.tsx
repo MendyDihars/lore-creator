@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from '../../../store';
-import { TextField, Typography, Button } from '@mui/material';
+import { TextField, Typography, Button, MenuItem } from '@mui/material';
 import ImageField from './ImageField';
 import { create } from '../../actions/event-action';
+import { fetch as fetchPeriods } from '../../actions/period-action';
 import type { Event } from '../../types/event';
 import type { Lore } from '../../types/lore';
+import type { Period } from '../../types/period';
 
 interface Props {
   event?: Event
@@ -15,19 +17,22 @@ interface Props {
 const FormEvent = (props: Props) => {
   const { event, onClose } = props;
   const lore: Lore = useSelector(state => state.lores?.lore)
+  const periods: Period[] = useSelector(state => state.periods?.periods);
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
+  const [periodId, setPeriodId] = useState('');
 
   const close = (e) => {
     onClose(e);
     setName('');
     setImage('');
+    setPeriodId('');
   }
 
   const save = (e) => {
     if (!event) {
-      dispatch(create({ id: lore.id, event: { name, image } }) as any);
+      dispatch(create({ id: lore.id, event: { name, image, period: periodId } }) as any);
       close(e);
     }
   }
@@ -40,12 +45,20 @@ const FormEvent = (props: Props) => {
     setImage(e?.target?.value);
   }
 
+  const handlePeriod = (id: string) => () => {
+    setPeriodId(id);
+  }
+
   useEffect(() => {
     if (event) {
       setName(event.name);
-      setImage(event.image)
+      setImage(event.image);
+      setPeriodId(event.period);
     }
-  })
+    if (!periods.length) {
+      dispatch(fetchPeriods(lore.id));
+    }
+  }, [])
 
   return (
     <div className="group-inputs overflow">
@@ -54,6 +67,17 @@ const FormEvent = (props: Props) => {
       </Typography>
       <TextField classes={{ root: "input" }} required label="Nom" value={name} onChange={handleName} />
       <ImageField url={image} label="Image" onChange={handleImage} />
+      <TextField
+        select
+        value={periodId}
+        label="Période"
+      >
+        {
+          periods.map(period => (
+            <MenuItem value={period.id} onClick={handlePeriod(period.id)}>{period.name}</MenuItem>
+          ))
+        }
+      </TextField>
       <div className="buttons">
         <div className="button-cancel">
           <Button onClick={close}>

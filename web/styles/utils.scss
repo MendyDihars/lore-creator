@@ -4,6 +4,9 @@ $sizes: 8 16 24 32 46 54 100 150 200 300 400 500;
   .mt-#{$size} {
     margin-top: #{$size}px;
   }
+  .mr-#{$size} {
+    margin-right: #{$size}px;
+  }
 }
 
 .flexcenter {

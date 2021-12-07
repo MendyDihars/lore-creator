@@ -46,8 +46,8 @@ const FormPeriod = (props: Props) => {
     setName(event?.target?.value);
   }
 
-  const handlePosition = (position: number) => () => {
-    setPosition(position);
+  const handlePosition = (p: number) => () => {
+    setPosition(p);
   }
 
   const close = e => {
@@ -73,7 +73,6 @@ const FormPeriod = (props: Props) => {
         select
         value={period?.position || 1}
         label="Ou se situe la période"
-        // onChange={handlePosition}
       >
         {
           listPeriods.map(p =>

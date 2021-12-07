@@ -11,7 +11,7 @@ const create = async (req, res): Promise<void> => {
     const { body } = req;
     const { loreId } = req.params;
     body.lore = loreId;
-    await createEvent(body, EventModel);
+    const event = await createEvent(body, EventModel);
     res.status(200).send(cleanItem(event));
   } catch (e) {
     res.status(500).send('Something wrong with event creation');

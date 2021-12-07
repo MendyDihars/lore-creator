@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Event as EventEntity } from '../types/event';
-import { Card, Typography, Button } from '@mui/material';
+import { Typography } from '@mui/material';
 
 interface Props {
   event: EventEntity
@@ -9,17 +9,13 @@ interface Props {
 const Event = (props: Props) => {
   const { event } = props;
   return (
-    <Card classes={{ root: 'event' }}>
-      <Typography classes={{ root: 'event-title' }} variant="h4">
+    <div className="event">
+      <Typography variant="h4" classes={{ root: 'event-title' }}>
         {event.name}
       </Typography>
-      {event.image && <img src={event.image} alt={event.name} className="event-img" />}
-      <div className="event-button">
-        <Button variant="contained">
-          Go
-        </Button>
-      </div>
-    </Card>
+      <img src={event.image} className="event-image" />
+      <div className="event-content"></div>
+    </div>
   )
 }
 

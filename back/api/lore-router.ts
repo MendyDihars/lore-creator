@@ -8,8 +8,8 @@ const LoreModel = createLoreModel();
 const create = async (req, res): Promise<void> => {
   try {
     const { body } = req;
-    await createLore(body, LoreModel);
-    res.status(200).send(cleanItem(body));
+    const lore = await createLore(body, LoreModel);
+    res.status(200).send(cleanItem(lore));
   } catch (e) {
     res.status(500).send('Something wrong with lore creation');
   }

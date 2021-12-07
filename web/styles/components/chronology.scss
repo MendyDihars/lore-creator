@@ -1,0 +1,36 @@
+.chrono {
+  position: relative;
+  &-dot-hover {
+    @extend .flexcenter;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background: white;
+    color: $primary;
+    padding: 8px;
+    border-radius: 2px;
+    z-index: 2;
+  }
+  &-breadcrumb {
+    @extend .flexcenter;
+    margin: 32px 0 16px 0;
+    &_dot {
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      border: 1px solid white;
+      cursor: pointer; 
+      &--active {
+        height: 25px;
+        width: 25px;
+        background: white;
+      }
+    }
+    &_link {
+      width: 10px;
+      border-top: 1px solid white;
+      border-bottom: 1px solid white;
+    }
+  }
+}
