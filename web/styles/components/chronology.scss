@@ -1,17 +1,4 @@
 .chrono {
-  position: relative;
-  &-dot-hover {
-    @extend .flexcenter;
-    position: absolute;
-    top: 50px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    background: white;
-    color: $primary;
-    padding: 8px;
-    border-radius: 2px;
-    z-index: 2;
-  }
   &-breadcrumb {
     @extend .flexcenter;
     margin: 32px 0 16px 0;
@@ -20,17 +7,45 @@
       width: 15px;
       border-radius: 50%;
       border: 1px solid white;
-      cursor: pointer; 
+      cursor: pointer;
+      position: relative;
       &--active {
         height: 25px;
         width: 25px;
         background: white;
+      }
+      &--popover {
+        @extend .flexcenter;
+        position: absolute;
+        top: 32px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        background: white;
+        color: $main-color;
+        padding: 8px;
+        border-radius: 2px;
+        z-index: 2;
       }
     }
     &_link {
       width: 10px;
       border-top: 1px solid white;
       border-bottom: 1px solid white;
+    }
+  }
+
+  &-period {
+    &-title {
+      @extend .flexcenter;
+    }
+  }
+
+  &-events {
+    display: flex;
+    &_event {
+      min-width: 50%;
+      background: $primary-transparent;
+      text-shadow: 0 0 3px $main-color;
     }
   }
 }

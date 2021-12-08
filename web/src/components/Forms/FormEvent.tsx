@@ -21,6 +21,7 @@ const FormEvent = (props: Props) => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
+  const [content, setContent] = useState('');
   const [periodId, setPeriodId] = useState('');
 
   const close = (e) => {
@@ -32,7 +33,7 @@ const FormEvent = (props: Props) => {
 
   const save = (e) => {
     if (!event) {
-      dispatch(create({ id: lore.id, event: { name, image, period: periodId } }) as any);
+      dispatch(create({ id: lore.id, event: { name, image, period: periodId, content } }) as any);
       close(e);
     }
   }
@@ -49,11 +50,18 @@ const FormEvent = (props: Props) => {
     setPeriodId(id);
   }
 
+  const handleContent = e => {
+    if (e?.target?.value) {
+      setContent(e.target.value);
+    }
+  }
+
   useEffect(() => {
     if (event) {
       setName(event.name);
       setImage(event.image);
       setPeriodId(event.period);
+      setContent(event.content);
     }
     if (!periods.length) {
       dispatch(fetchPeriods(lore.id));
@@ -74,10 +82,17 @@ const FormEvent = (props: Props) => {
       >
         {
           periods.map(period => (
-            <MenuItem value={period.id} onClick={handlePeriod(period.id)}>{period.name}</MenuItem>
+            <MenuItem key={period.id} value={period.id} onClick={handlePeriod(period.id)}>{period.name}</MenuItem>
           ))
         }
       </TextField>
+      <TextField
+        multiline
+        value={content}
+        onChange={handleContent}
+        label="Contenu de l'événement"
+        classes={{ root: 'textarea' }}
+      />
       <div className="buttons">
         <div className="button-cancel">
           <Button onClick={close}>

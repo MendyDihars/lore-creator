@@ -2,6 +2,7 @@ import mongoose, { Schema, Model, model } from 'mongoose';
 
 interface IEvent {
   name: string;
+  content?: string;
   period?: Schema.Types.ObjectId;
   image?: string;
   lore: Schema.Types.ObjectId;
@@ -9,6 +10,7 @@ interface IEvent {
 
 const schema = new Schema<IEvent>({
   name: { type: String, required: true },
+  content: { type: String },
   period: {
     type: Schema.Types.ObjectId,
     ref: 'Period'

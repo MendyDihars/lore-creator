@@ -71,12 +71,12 @@ const FormPeriod = (props: Props) => {
       <TextField classes={{ root: "input" }} required label="Nom" value={name} onChange={handleName} />
       <TextField
         select
-        value={period?.position || 1}
+        value={position}
         label="Ou se situe la période"
       >
         {
-          listPeriods.map(p =>
-            <MenuItem onClick={handlePosition(p.position)} value={p.position}>{p.name}</MenuItem>
+          listPeriods.map((p: Period, index: number) =>
+            <MenuItem key={p.name.replace(/\s/g, '_').toLowerCase() + "_" + index} onClick={handlePosition(p.position)} value={p.position}>{p.name}</MenuItem>
           )
         }
       </TextField>

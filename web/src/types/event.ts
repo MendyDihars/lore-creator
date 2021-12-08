@@ -1,6 +1,7 @@
 export interface Event {
   id?: string;
   name: string;
+  content?: string;
   image?: string;
   period?: string;
 }
